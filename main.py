@@ -4,6 +4,7 @@ from telethon.tl.custom import Message
 
 from bot.utils.config_reader import config
 from bot.utils.database.postgres import DataBase
+from bot.utils.delete_message_helper import delete_message_helper
 from bot.utils.edit_message_helper import edit_message_helper
 from bot.utils.get_id_with_username_helper import get_id_with_username_helper
 from bot.utils.translate_message_helper import translate_message_helper
@@ -20,6 +21,15 @@ async def main():
 
 
 with (client):
+    @client.on(events.MessageDeleted(chats=[int(config.blacklist_chat)]))
+    async def delete_message_blacklist(event):
+        await delete_message_helper(client, event.deleted_ids, int(config.blacklist_en_chat))
+
+
+    @client.on(events.MessageDeleted(chats=[int(config.blacklist_en_chat)]))
+    async def delete_message_blacklist_en(event):
+        await delete_message_helper(client, event.deleted_ids, int(config.blacklist_chat))
+
     @client.on(events.MessageEdited(chats=[int(config.blacklist_chat)]))
     async def edit_message_blacklist(event: Message):
         await edit_message_helper(client, event.message.id, int(config.blacklist_en_chat), event.message.message,

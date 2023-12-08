@@ -11,7 +11,7 @@ from bot.utils.translator import translate_message, GlossaryEnum
 async def translate_message_helper(client: TelegramClient, event: Message,
                                    sender_chat_id: int, recipient_chat_id: int, sender_name: str,
                                    source_lang: str, target_lang: str, glossary_id: GlossaryEnum) -> None:
-    if event.sticker or event.gif:
+    if event.sticker or event.gif or event.out:
         return
 
     translate_text = await translate_message(event.raw_text, source_lang, target_lang, glossary_id)
