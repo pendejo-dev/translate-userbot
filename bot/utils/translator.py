@@ -20,7 +20,7 @@ async def translate_message(message: str, source_lang: str, target_lang: str, gl
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Host': 'api.deepl.com',
-        'Authorization': 'DeepL-Auth-Key 2468d41c-6bfb-4595-0a95-ab2ed617d601'
+        'Authorization': 'DeepL-Auth-Key XXXX'
     }
 
     async with aiohttp.ClientSession() as session:
@@ -35,7 +35,6 @@ async def translate_message(message: str, source_lang: str, target_lang: str, gl
                 return None
 
             if not response.ok:
-                print(await response.text())
                 logger.error('not response.ok')
                 return None
 
