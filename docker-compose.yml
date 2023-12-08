@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  get-id-with-username:
+    container_name: get_Id_With_Username
+    build:
+      context: .
+    restart: always
+    ports:
+      - "0.0.0.0:86:80"
+      - "0.0.0.0:447:443"
+    volumes:
+      - .:/getIdWithUsername
+    env_file: .env
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
