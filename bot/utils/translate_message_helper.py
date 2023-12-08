@@ -2,6 +2,7 @@ from contextlib import suppress
 
 from telethon import TelegramClient
 from telethon.tl.custom import Message
+from telethon.tl.types import MessageMediaPhoto
 
 from bot.utils.database.postgres import DataBase
 from bot.utils.translator import translate_message, GlossaryEnum
@@ -35,17 +36,17 @@ async def translate_message_helper(client: TelegramClient, event: Message,
             )
 
     with suppress(ValueError):
-        if event.photo:
+        if event.photo and isinstance(event.message.media, MessageMediaPhoto):
             recipient_message = await client.send_message(
                 recipient_chat_id,
-                f"{translate_text}\n<b>«{sender_first_name}»</b>",
+                message=f"{translate_text}\n<b>«{sender_first_name}»</b>",
                 file=event.message.media,
                 reply_to=reply_message_id
             )
         else:
             recipient_message = await client.send_message(
                 recipient_chat_id,
-                f"{translate_text}\n<b>«{sender_first_name}»</b>",
+                message=f"{translate_text}\n<b>«{sender_first_name}»</b>",
                 reply_to=reply_message_id
             )
 
