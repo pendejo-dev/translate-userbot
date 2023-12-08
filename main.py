@@ -10,7 +10,7 @@ from bot.utils.get_id_with_username_helper import get_id_with_username_helper
 from bot.utils.translate_message_helper import translate_message_helper
 from bot.utils.translator import GlossaryEnum
 
-client = TelegramClient('anon', config.api_id, config.api_hash)
+client = TelegramClient('anon_prod', config.api_id, config.api_hash)
 
 
 async def main():
