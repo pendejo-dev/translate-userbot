@@ -20,7 +20,7 @@ async def translate_message(message: str, source_lang: str, target_lang: str, gl
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Host': 'api.deepl.com',
-        'Authorization': 'DeepL-Auth-Key XXXX'
+        'Authorization': 'DeepL-Auth-Key 2468d41c-6bfb-4595-0a95-ab2ed617d601'
     }
 
     async with aiohttp.ClientSession() as session:

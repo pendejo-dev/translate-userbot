@@ -56,5 +56,32 @@ class DataBaseClass:
         except DuplicateTableError:
             pass
 
+        try:
+            await self.execute(
+                """CREATE TABLE public.breakthrough_messages
+                (
+                    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+                    sender_user_id bigint NOT NULL,
+                    message text,
+                    CONSTRAINT breakthrough_messages_pkey PRIMARY KEY (id)
+                )""", execute=True
+            )
+        except DuplicateTableError:
+            pass
+
+        try:
+            await self.execute(
+                """CREATE TABLE public.breakthrough_messages_2
+                (
+                    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+                    sender_user_id bigint NOT NULL,
+                    message text,
+                    date text,
+                    CONSTRAINT breakthrough_messages_2_pkey PRIMARY KEY (id)
+                )""", execute=True
+            )
+        except DuplicateTableError:
+            pass
+
 
 DataBase = DataBaseClass()
